@@ -21,8 +21,10 @@ tz = timezone("Asia/Yerevan")
 cal = Calendar()
 morning_shift_start =  datetime.time(int('8'), int('15'))
 morning_shift_end = datetime.time(int('4'),int('15'))
+
 evening_shift_start = datetime.time(int('4'),int('15'))
 evening_shift_end = datetime.time(int('0'),int('15'))
+
 night_shift_start = datetime.time(int('0'),int('15'))
 night_shift_end = datetime.time(int('8'),int('15'))
 
@@ -34,23 +36,29 @@ for i in range(52):
     morning_shift = Event()
     morning_shift.name = "Morning Shift"
     morning_shift.begin = datetime.datetime.combine(start_date + datetime.timedelta(days=i * 7), morning_shift_start,tz)
-    morning_shift.end = datetime.datetime.combine(start_date + datetime.timedelta(days=(i*7)), morning_shift_end,tz)
+    morning_shift.end = datetime.datetime.combine(start_date + datetime.timedelta(days=(i*7)+1), morning_shift_end,tz)
     cal.events.add(morning_shift)
 
 
     evening_shift = Event()
     evening_shift.name = "Evening Shift"
-    evening_shift.begin = datetime.datetime.combine(start_date + datetime.timedelta(days=(i*7)+3), evening_shift_start,tz)
-    evening_shift.end = datetime.datetime.combine(start_date + datetime.timedelta(days=(i*7)+3), evening_shift_end,tz)
+    evening_shift.begin = datetime.datetime.combine(start_date + datetime.timedelta(days=(i*7)+4), evening_shift_start,tz)
+    evening_shift.end = datetime.datetime.combine(start_date + datetime.timedelta(days=(i*7)+5), evening_shift_end,tz)
     cal.events.add(evening_shift)
 
     
     night_shift = Event()
     night_shift.name = "Night Shift"
-    night_shift.begin = datetime.datetime.combine(start_date + datetime.timedelta(days=(i*7)+4), night_shift_start,tz)
-    night_shift.end = datetime.datetime.combine(start_date + datetime.timedelta(days=(i*7)+4), night_shift_end,tz)
+    night_shift.begin = datetime.datetime.combine(start_date + datetime.timedelta(days=(i*7)+6), night_shift_start,tz)
+    night_shift.end = datetime.datetime.combine(start_date + datetime.timedelta(days=(i*7)+7), night_shift_end,tz)
     cal.events.add(night_shift)
 
+    #Create a free day event
+    free_day = Event()
+    free_day.name = "Free Day"
+    free_day.begin = datetime.datetime.combine(start_date + datetime.timedelta(days=(i*7)+8), datetime.time(8,15),tz)
+    free_day.end = datetime.datetime.combine(start_date + datetime.timedelta(days=(i*7)+9), datetime.time(0,0),tz)
+    cal.events.add(free_day)
 
 # Print the calendar events
 for event in cal.events:
