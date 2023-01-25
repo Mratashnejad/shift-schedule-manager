@@ -7,9 +7,9 @@ from pytz import timezone
 
 class Shift(models.Model):
 
-    name       =            models.CharField(max_length=20)
-    start_time =            models.TimeField
-    end_time   =            models.TimeField
+    name                   = models.CharField(max_length=20)
+    start_time             = models.TimeField
+    end_time               = models.TimeField
 
     def __str__(self):
         return self.name
@@ -17,8 +17,8 @@ class Shift(models.Model):
 
 class Schadule(models.Model):
 
-    start_date =            models.DateField()
-    tz         =            timezone("Asia/Yerevan")
+    start_date              = models.DateField()
+    tz                      = timezone("Asia/Yerevan")
 
     def create_iCalander(self):
         cal = Calendar()
